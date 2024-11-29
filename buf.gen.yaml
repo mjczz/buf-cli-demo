@@ -1,0 +1,27 @@
+version: v2
+managed:
+  enabled: true
+  override:
+    - file_option: go_package_prefix
+      value: github.com/mjczz/buf-cli-demo/gen # 这样写之后，pet.proto里面就不用写 option go_package
+  # 由于 buf.build/bufbuild/protovalidate 是通过buf管理的依赖，避免go package prefix用项目中go mod里面的module
+  disable:
+    - file_option: go_package_prefix
+      module: buf.build/bufbuild/protovalidate
+plugins:
+  - remote: buf.build/protocolbuffers/go
+    out: gen
+    opt: paths=source_relative
+  - remote: buf.build/connectrpc/go
+    out: gen
+    opt: paths=source_relative
+  - local: /Users/ccc/go/bin/protoc-gen-go-grpc
+    out: gen
+    opt: paths=source_relative
+#  - local: /Users/ccc/go/bin/protoc-gen-doc
+#    out: gen
+#    opt: html,index.html
+
+
+inputs:
+  - directory: proto
