@@ -41,8 +41,6 @@ func (s *petStoreServiceServer) GetPet(
 	if err := protovalidate.Validate(req.Msg); err != nil {
 		fmt.Println("validation failed:", err)
 		return &connect.Response[petv1.GetPetResponse]{}, err
-	} else {
-		fmt.Println("validation succeeded")
 	}
 	log.Printf("Got a request to get a %v", petId)
 	return connect.NewResponse(&petv1.GetPetResponse{}), nil
@@ -56,8 +54,6 @@ func (s *petStoreServiceServer) DeletePet(
 	if err := protovalidate.Validate(req.Msg); err != nil {
 		fmt.Println("validation failed:", err)
 		return &connect.Response[petv1.DeletePetResponse]{}, err
-	} else {
-		fmt.Println("validation succeeded")
 	}
 	log.Printf("Got a request to delete a %v", petId)
 	return connect.NewResponse(&petv1.DeletePetResponse{}), nil
@@ -73,8 +69,6 @@ func (s *petStoreServiceServer) PutPet(
 	if err := protovalidate.Validate(req.Msg); err != nil {
 		fmt.Println("validation failed:", err)
 		return &connect.Response[petv1.PutPetResponse]{}, err
-	} else {
-		fmt.Println("validation succeeded")
 	}
 	log.Printf("Got a request to create a %v named %s", petType, name)
 	return connect.NewResponse(&petv1.PutPetResponse{}), nil
